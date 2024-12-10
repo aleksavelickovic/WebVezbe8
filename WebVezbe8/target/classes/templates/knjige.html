@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="css/StiloviForma.css" />
+<link rel="stylesheet" type="text/css"
+	href="css/StiloviHorizontalniMeni.css" />
+<meta charset="UTF-8">
+<title>POCETNA</title>
+<base th:href="@{/}">
+</head>
+<body>
+	<ul>
+		<li>
+			<a href="/PrviMavenVebProjekat/knjige">Knjige</a>
+		</li>
+		<li>
+			<a href="/PrviMavenVebProjekat/clanskekarte">Clanske karte</a>
+		</li>
+	</ul>
+
+	<table>
+		<caption>Knjige</caption>
+		<tr>
+			<th>Red.br</th>
+			<th>Details</th>
+			<th>Name</th>
+			<th>reg.NO</th>
+			<th>PageNO</th>
+			<th>Laungauge</th>
+			<th></th>
+		</tr>
+		<tr th:each="itKnjiga, status: ${knjige}">
+			<td class="broj" th:text="${(status.index + 1) + '.'}"></td>		
+			<td>
+				<a th:href="|knjige/details?id=${itKnjiga.id}|" th:text="${itKnjiga.naziv}"></a>
+			</td>
+			<td th:text="${itKnjiga.naziv}"></td>
+			<td th:text="${itKnjiga.registarskiBrojPrimerka}"></td>
+			<td th:text="${itKnjiga.brojStranica}"></td>
+			<td th:text="${itKnjiga.jezik}"></td>
+			<td>
+				<form action="knjige/delete" method="post">
+					<input type="hidden" name="id" th:value="${itKnjiga.id}" />
+					<input type="submit" value="Obrisi" />
+				</form>
+			</td>
+		</tr>
+	</table>
+	
+	<ul>
+		<li>
+			<a href="knjige/add">Dodaj knjigu</a>
+		</li>
+	</ul>
+</body>
+</html>
